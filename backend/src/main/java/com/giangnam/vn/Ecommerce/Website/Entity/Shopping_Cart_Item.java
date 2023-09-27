@@ -13,11 +13,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Shopping_Cart_Item {
+public class Shopping_Cart_Item implements Serializable {
 
 	@EmbeddedId
 	private ShoppingProductKey id;

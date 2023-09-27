@@ -1,5 +1,6 @@
 package com.giangnam.vn.Ecommerce.Website.Entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -18,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class User_Payment_Method {
+public class User_Payment_Method implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +32,7 @@ public class User_Payment_Method {
 	
 	@ManyToOne
 	@JoinColumn(name="payment_type_id")
-	@JsonBackReference
+	@JsonBackReference(value = "user2")
 	private Payment_Type paymentType;
 	
 	private String provider;
