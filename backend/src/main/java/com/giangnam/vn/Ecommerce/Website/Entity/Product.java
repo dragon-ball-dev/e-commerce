@@ -1,5 +1,6 @@
 package com.giangnam.vn.Ecommerce.Website.Entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Entity
-public class Product {
+public class Product implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
