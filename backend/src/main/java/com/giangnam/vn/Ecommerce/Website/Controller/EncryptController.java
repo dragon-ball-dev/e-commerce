@@ -1,5 +1,6 @@
 package com.giangnam.vn.Ecommerce.Website.Controller;
 
+import com.giangnam.vn.Ecommerce.Website.DTO.Render;
 import com.giangnam.vn.Ecommerce.Website.DTO.ShoppingCartDTO;
 import com.giangnam.vn.Ecommerce.Website.Entity.CompositeKey.EncryptAcqToMer;
 import com.giangnam.vn.Ecommerce.Website.Entity.EncryptCustomToMerchant;
@@ -61,7 +62,7 @@ public class EncryptController {
     }
 
     @PostMapping("mer-to-cus")
-    public ResponseEntity<String> sendMerToCus(@RequestBody ToCus test) {
+    public ResponseEntity<Render> sendMerToCus(@RequestBody ToCus test) {
         return encryptIml.sendSignatureAcqToMer(test.getSignaure(), test.getDataVerify());
     }
 }
