@@ -1,6 +1,7 @@
 package com.giangnam.vn.Ecommerce.Website.Service.Iml;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.giangnam.vn.Ecommerce.Website.DTO.Render;
 import com.giangnam.vn.Ecommerce.Website.DTO.ShoppingCartDTO;
 import com.giangnam.vn.Ecommerce.Website.Entity.*;
 import com.giangnam.vn.Ecommerce.Website.Entity.CompositeKey.EncryptAcqToMer;
@@ -294,7 +295,7 @@ public class EncryptIml implements EncryptService {
 
     //mertocus
     @Override
-    public ResponseEntity<String> sendSignatureAcqToMer(String signatureDigital, String dataVerify) {
+    public ResponseEntity<Render> sendSignatureAcqToMer(String signatureDigital, String dataVerify) {
         try {
             // byte chữ kí số
             byte[] signatureBytes = Base64.getDecoder().decode(signatureDigital);
@@ -309,7 +310,9 @@ public class EncryptIml implements EncryptService {
 
             signature.update(dataVerify.getBytes("UTF-8"));
             if (signature.verify(signatureBytes)) {
-                return new ResponseEntity<>("Agree transaction", HttpStatus.OK);
+                Render render = new Render();
+                render.setRender("Agree transaction");
+                return new ResponseEntity<>(render, HttpStatus.OK);
             }
 
         } catch (Exception e) {

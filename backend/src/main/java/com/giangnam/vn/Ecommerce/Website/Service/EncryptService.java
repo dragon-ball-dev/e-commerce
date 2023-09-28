@@ -1,5 +1,6 @@
 package com.giangnam.vn.Ecommerce.Website.Service;
 
+import com.giangnam.vn.Ecommerce.Website.DTO.Render;
 import com.giangnam.vn.Ecommerce.Website.DTO.ShoppingCartDTO;
 import com.giangnam.vn.Ecommerce.Website.Entity.CompositeKey.EncryptAcqToMer;
 import com.giangnam.vn.Ecommerce.Website.Entity.EncryptCustomToMerchant;
@@ -24,5 +25,5 @@ public interface EncryptService {
 
     public ResponseEntity<EncryptAcqToMer> sendSignatureToAcq(String cert, String signatureDigital, String dataVerify);
 
-    public ResponseEntity<String> sendSignatureAcqToMer(String signatureDigital, String dataVerify);
+    public ResponseEntity<Render> sendSignatureAcqToMer(String signatureDigital, String dataVerify);
 }
