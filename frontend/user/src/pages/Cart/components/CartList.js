@@ -49,6 +49,15 @@ const ProductList = () => {
           </p>
         </div>
         <div className="text-right my-5">
+        <a href="/confirm-order">
+          <button
+            onClick // Gọi hàm handlePlaceOrderClick khi người dùng nhấn nút
+            type="button"
+            className="bg-blue-700 text-white px-4 py-2.5 rounded-lg hover:bg-blue-900 focus-"
+          >
+            Đặt hàng theo giao thức <i className="ml-2 bi bi-arrow-right"/>
+          </button>
+        </a> &nbsp;
         <a href="/check-out">
           <button
             onClick // Gọi hàm handlePlaceOrderClick khi người dùng nhấn nút

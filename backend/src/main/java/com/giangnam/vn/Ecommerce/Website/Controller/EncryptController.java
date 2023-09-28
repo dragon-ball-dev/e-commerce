@@ -33,15 +33,24 @@ public class EncryptController {
     EncryptIml encryptIml;
 
     @PostMapping("/addnew-transaction")
+    @CrossOrigin
     public ResponseEntity<?> addNew(@RequestParam Integer shoppingCartId) {
         return new ResponseEntity<>(encryptIml.addNewTransactionId(shoppingCartId), HttpStatus.OK) ;
     }
+
+    @GetMapping("/get-transaction")
+    @CrossOrigin
+    public ResponseEntity<Transaction> get(@RequestParam Integer shoppingCartId) {
+        return new ResponseEntity<>(encryptIml.getTransactionId(shoppingCartId), HttpStatus.OK) ;
+    }
     @PostMapping("/add")
+    @CrossOrigin
     public Integer add() {
         return encryptIml.random();
     }
 
     @PostMapping(value = "/encryptCusToMer")
+    @CrossOrigin
     public ResponseEntity<EncryptCustomToMerchant> sendCusToMer(@RequestBody PaymentRequest paymentRequest) {
         try {
             return encryptIml.sendEncryptToMerchant(paymentRequest);
@@ -52,16 +61,19 @@ public class EncryptController {
     }
 
     @PostMapping("/decrypt")
+    @CrossOrigin
     public ResponseEntity<EncryptMerToAcq> getDTO(@RequestBody Test request) {
         return encryptIml.sendEncryptToAcquired(request.getOrderStr(), request.getSlipStr());
     }
 
     @PostMapping("/ac-to-mer")
+    @CrossOrigin
     public ResponseEntity<EncryptAcqToMer> sendAcqToMer(@RequestBody ToMer toMer) {
         return encryptIml.sendSignatureToAcq(toMer.getCert(), toMer.getSignatureDigital(), toMer.getDataToVerify());
     }
 
     @PostMapping("mer-to-cus")
+    @CrossOrigin
     public ResponseEntity<Render> sendMerToCus(@RequestBody ToCus test) {
         return encryptIml.sendSignatureAcqToMer(test.getSignaure(), test.getDataVerify());
     }

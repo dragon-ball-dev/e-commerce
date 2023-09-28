@@ -24,6 +24,7 @@ const CheckOut = () => {
     address: yup.string().required("Address is required"),
   });
 
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -52,7 +53,7 @@ const CheckOut = () => {
           headers: headers,
         }
       );
-      
+
       //console.log(response.data.)
 
       if (response.status === 200) {
@@ -67,7 +68,7 @@ const CheckOut = () => {
           }, 4200);
         } else if (paymentMethod === "vnpay") {
           // Gọi tới phương thức GET localhost:8080/create-payment
-          
+
           const createPaymentResponse = await axios.get(
             "http://localhost:8080/create_payment",
             {
@@ -83,7 +84,7 @@ const CheckOut = () => {
           window.location.href = paymentUrl;
         }
       } else if (response.status === 400) {
-          toast.error("Checkout thất bại. Vui lòng thử lại!!!");
+        toast.error("Checkout thất bại. Vui lòng thử lại!!!");
       }
 
       // Thực hiện các hành động khác sau khi submit thành công
@@ -121,94 +122,96 @@ const CheckOut = () => {
   return (
     <Box m="20px">
       <form onSubmit={handleFormSubmit}>
-            <Box mt={2} mb={2}>
-              <Typography variant="h6" sx={{ gridColumn: "span 4" }}>
-                Địa chỉ
-              </Typography>
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label=""
-                onChange={(event) => setAddress(event.target.value)}
-                name="address"
-                value={address}
-                error={touched.address && !!errors.address}
-                helperText={touched.address && errors.address}
-                sx={{ gridColumn: "span 2" }}
-              />
-            </Box>
+        <Box mt={2} mb={2}>
+          <Typography variant="h6" sx={{ gridColumn: "span 4" }}>
+            Địa chỉ
+          </Typography>
+          <TextField
+            fullWidth
+            variant="filled"
+            type="text"
+            label=""
+            onChange={(event) => setAddress(event.target.value)}
+            name="address"
+            value={address}
+            error={touched.address && !!errors.address}
+            helperText={touched.address && errors.address}
+            sx={{ gridColumn: "span 2" }}
+            required
+          />
+        </Box>
 
-            <Box mt={2} mb={2}>
-              <Typography variant="h6" sx={{ gridColumn: "span 4" }}>
-                Số điện thoại
-              </Typography>
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label=""
-                onChange={(event) => {
-                  const value = event.target.value.replace(/\D/g, ""); // Loại bỏ ký tự không phải số
-                  setPhoneNumber(value);
-                }}
-                name="phoneNumber"
-                value={phoneNumber}
-                error={touched.phoneNumber && !!errors.phoneNumber}
-                helperText={touched.phoneNumber && errors.phoneNumber}
-                sx={{ gridColumn: "span 2" }}
-              />
-            </Box>
+        <Box mt={2} mb={2}>
+          <Typography variant="h6" sx={{ gridColumn: "span 4" }}>
+            Số điện thoại
+          </Typography>
+          <TextField
+            fullWidth
+            variant="filled"
+            type="text"
+            label=""
+            onChange={(event) => {
+              const value = event.target.value.replace(/\D/g, ""); // Loại bỏ ký tự không phải số
+              setPhoneNumber(value);
+            }}
+            name="phoneNumber"
+            value={phoneNumber}
+            error={touched.phoneNumber && !!errors.phoneNumber}
+            helperText={touched.phoneNumber && errors.phoneNumber}
+            sx={{ gridColumn: "span 2" }}
+            required
+          />
+        </Box>
 
-            <Box
-              display="grid"
-              gap="30px"
-              gridTemplateColumns="repeat(4, minmax(0, 1fr))"
-              sx={{
-                "& > div": { gridColumn: "span 4" },
-              }}
+        <Box
+          display="grid"
+          gap="30px"
+          gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+          sx={{
+            "& > div": { gridColumn: "span 4" },
+          }}
+        >
+          <Typography variant="h6" sx={{ gridColumn: "span 4" }}>
+            Phương thức vận chuyển
+          </Typography>
+          <Box display="flex" sx={{ gridColumn: "span 4" }}>
+            <Button
+              variant={shippingMethod === "express shipping" ? "contained" : "outlined"}
+              onClick={() => setShippingMethod("express shipping")}
             >
-              <Typography variant="h6" sx={{ gridColumn: "span 4" }}>
-                Phương thức vận chuyển
-              </Typography>
-              <Box display="flex" sx={{ gridColumn: "span 4" }}>
-                <Button
-                  variant={shippingMethod === "express shipping" ? "contained" : "outlined"}
-                  onClick={() => setShippingMethod("express shipping")}
-                >
-                  Express Shipping
-                </Button>
-                <Button
-                  variant={shippingMethod === "standard shipping" ? "contained" : "outlined"}
-                  onClick={() => setShippingMethod("standard shipping")}
-                >
-                  Standard Shipping
-                </Button>
-              </Box>
-              <Typography variant="h6" sx={{ gridColumn: "span 4" }}>
-                Phương thức thanh toán
-              </Typography>
-              <Box display="flex" sx={{ gridColumn: "span 4" }}>
-                <Button
-                  variant={paymentMethod === "cash" ? "contained" : "outlined"}
-                  onClick={() => setPaymentMethod("cash")}
-                >
-                  Cash on Delivery
-                </Button>
-                <Button
-                  variant={paymentMethod === "vnpay" ? "contained" : "outlined"}
-                  onClick={() => setPaymentMethod("vnpay")}
-                >
-                  VNPAY
-                </Button>
-              </Box>
-            </Box>
-            <Box display="flex" justifyContent="end" mt={4}>
-              <Button type="submit" color="secondary" variant="contained">
-                Xác nhận đặt hàng
-              </Button>
-            </Box>
-          </form>
+              Express Shipping
+            </Button>
+            <Button
+              variant={shippingMethod === "standard shipping" ? "contained" : "outlined"}
+              onClick={() => setShippingMethod("standard shipping")}
+            >
+              Standard Shipping
+            </Button>
+          </Box>
+          <Typography variant="h6" sx={{ gridColumn: "span 4" }}>
+            Phương thức thanh toán
+          </Typography>
+          <Box display="flex" sx={{ gridColumn: "span 4" }}>
+            <Button
+              variant={paymentMethod === "cash" ? "contained" : "outlined"}
+              onClick={() => setPaymentMethod("cash")}
+            >
+              Cash on Delivery
+            </Button>
+            <Button
+              variant={paymentMethod === "vnpay" ? "contained" : "outlined"}
+              onClick={() => setPaymentMethod("vnpay")}
+            >
+              VNPAY
+            </Button>
+          </Box>
+        </Box>
+        <Box display="flex" justifyContent="end" mt={4}>
+          <Button type="submit" color="secondary" variant="contained">
+            Xác nhận đặt hàng
+          </Button>
+        </Box>
+      </form>
     </Box>
   );
 };

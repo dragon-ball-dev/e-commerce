@@ -25,50 +25,44 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Shop_Order implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonBackReference(value = "user3")
-    private User user;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	@JsonBackReference(value = "user3")
+	private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "shipping_method_id")
-    @JsonBackReference
-    private Shipping_Method shippingMethod;
+	@ManyToOne
+	@JoinColumn(name = "shipping_method_id")
+	@JsonBackReference
+	private Shipping_Method shippingMethod;
 
-    @OneToOne(mappedBy = "shop_Order", cascade = CascadeType.ALL)
-    private Shopping_Cart shopping_Cart;
+	@OneToOne(mappedBy = "shop_Order", cascade = CascadeType.ALL)
+	private Shopping_Cart shopping_Cart;
 
-    private Date orderDate;
+	private Date orderDate;
 
-    @NotNull
-    private String shipping_address;
+	@NotNull
+	private String shipping_address;
 
-    @Min(value = 0)
-    private int orderTotal;
+	@Min(value = 0)
+	private int orderTotal;
 
-    private String orderStatus;
-    private String description;
-    private String currency;
+	private String orderStatus;
 
-    public Shop_Order(User user, Shipping_Method shippingMethod, Shopping_Cart shopping_Cart, Date orderDate,
-                      @NotNull String shipping_address, @Min(0) int orderTotal, String orderStatus, String description, String currency) {
-        super();
-        this.user = user;
-        this.shippingMethod = shippingMethod;
-        this.shopping_Cart = shopping_Cart;
-        this.orderDate = orderDate;
-        this.shipping_address = shipping_address;
-        this.orderTotal = orderTotal;
-        this.orderStatus = orderStatus;
-        this.description = description;
-        this.currency = currency;
-    }
+	public Shop_Order(User user, Shipping_Method shippingMethod, Shopping_Cart shopping_Cart, Date orderDate,
+			@NotNull String shipping_address, @Min(0) int orderTotal, String orderStatus) {
+		super();
+		this.user = user;
+		this.shippingMethod = shippingMethod;
+		this.shopping_Cart = shopping_Cart;
+		this.orderDate = orderDate;
+		this.shipping_address = shipping_address;
+		this.orderTotal = orderTotal;
+		this.orderStatus = orderStatus;
+	}
 
 
-    public Shop_Order(User user, Shipping_Method byName, Shopping_Cart shoppingCart, Date date, String address, int total, String s) {
-    }
 }

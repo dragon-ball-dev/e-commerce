@@ -11,7 +11,6 @@ const Home = () => {
     <main>
       <Hero />
       <FeatureProducts />
-      <Testimonials />
       <Faq />
     </main>
   );

@@ -7,19 +7,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.giangnam.vn.Ecommerce.Website.DTO.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.giangnam.vn.Ecommerce.Website.Config.JWTUtils;
-import com.giangnam.vn.Ecommerce.Website.DTO.CartDTO;
-import com.giangnam.vn.Ecommerce.Website.DTO.CategoryDTO;
-import com.giangnam.vn.Ecommerce.Website.DTO.ChangePasswordDTO;
-import com.giangnam.vn.Ecommerce.Website.DTO.LoginDTO;
-import com.giangnam.vn.Ecommerce.Website.DTO.OrderDTO;
-import com.giangnam.vn.Ecommerce.Website.DTO.OrderInfoDTO;
-import com.giangnam.vn.Ecommerce.Website.DTO.ProductDTO;
-import com.giangnam.vn.Ecommerce.Website.DTO.UserDTO;
 import com.giangnam.vn.Ecommerce.Website.Entity.Payment_Type;
 import com.giangnam.vn.Ecommerce.Website.Entity.Product;
 import com.giangnam.vn.Ecommerce.Website.Entity.Product_Category;
@@ -446,4 +439,11 @@ public class UserService {
 		return result;
 	}
 
+	public CartIdDTO getCartId(String email) {
+		User user = findByEmail(email);
+		Integer shopping_Cart = user.getCartList().get(user.getCartList().size() - 1).getId() - 1;
+		CartIdDTO cartIdDTO = new CartIdDTO();
+		cartIdDTO.setCartId(shopping_Cart);
+		return cartIdDTO;
+	}
 }

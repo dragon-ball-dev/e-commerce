@@ -61,7 +61,7 @@ const ProductsDetails = () => {
         </p>
         <div className="flex flex-wrap justify-around">
           <div className="max-w-xl my-3">
-            <img className="rounded" src={product.poster} alt={product.name} />
+            <img className="rounded" src="https://www.w3schools.com/images/w3schools_green.jpg" alt={product.name} />
           </div>
           <div className="max-w-xl my-3">
             <p className="text-3xl font-bold text-gray-900 dark:text-slate-200">

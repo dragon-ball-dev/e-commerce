@@ -21,6 +21,10 @@ import Line from "../Admin/scenes/line";
 import Pie from "../Admin/scenes/pie";
 import FAQ from "../Admin/scenes/faq";
 import Geography from "../Admin/scenes/geography";
+import ConfirmOrder from "../pages/Cart/components/ConfirmOrder";
+import PaymentAuthority from "../pages/Cart/components/PaymentAuthority";
+import EncryptMerchant from "../pages/Cart/components/EcryptMerchant";
+import Signature from "../pages/Cart/components/Signature";
 //import Calendar from "../Admin/scenes/calendar";
 
 const AllRoutes = () => {
@@ -36,6 +40,10 @@ const AllRoutes = () => {
         <Route path="/update-info-user" element={<CreateUserForm />} />
         <Route path="/active-user" element={<ActiveAccount/>} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/confirm-order" element={<ConfirmOrder />} />
+        <Route path="/payment-authorization/:id" element={<PaymentAuthority />} />
+        <Route path="/ecrypt-merchant/:id" element={<EncryptMerchant />} />
+        <Route path="/signature/:id" element={<Signature />} />
         <Route path="/check-out" element={<Checkout />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/admin/" element={<Dashboard />} />

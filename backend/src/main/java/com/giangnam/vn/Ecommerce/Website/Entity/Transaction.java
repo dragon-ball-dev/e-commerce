@@ -6,4 +6,6 @@ import lombok.Data;
 public class Transaction {
     private String transactionIdMerchant;
     private String transactionIdCustomer;
+
+    private Integer orderId;
 }

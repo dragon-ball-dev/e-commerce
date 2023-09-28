@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -48,20 +49,15 @@ const Login = () => {
     }
   }
   return (
-    <main>
+    <main class="d-flex flex-column justify-content-center align-items-center min-vh-100">
       <section>
-        <p className="text-center text-2xl font-semibold dark:text-slate-100 my-10  underline underline-offset-8">
+        <p class="text-center text-2xl font-semibold my-10 underline">
           Đăng nhập
         </p>
       </section>
-      <form onSubmit={handleLogin}>
-        <div className="mb-6">
-          <label
-            htmlFor="email"
-            className="block mb-2 text-sm dont-medium text-gray-900 dark:text-slate-100"
-          >
-            Email
-          </label>
+      <form onSubmit={handleLogin} class="text-center">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
           <input
             ref={email}
             id="email"
@@ -69,16 +65,11 @@ const Login = () => {
             type="email"
             required
             autoComplete="off"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="form-control custom-input"
           />
         </div>
-        <div className="mb-6">
-          <label
-            htmlFor="password"
-            className="block mb-2 text-sm dont-medium text-gray-900 dark:text-slate-100"
-          >
-            Mật khẩu
-          </label>
+        <div class="mb-3">
+          <label for="password" class="form-label">Mật khẩu</label>
           <input
             ref={password}
             id="password"
@@ -86,13 +77,11 @@ const Login = () => {
             type="password"
             required
             autoComplete="off"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="form-control custom-input"
           />
         </div>
-        <button className="border px-5 py-2.5 bg-blue-700 text-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">
-          {" "}
-          Đăng nhập
-        </button>
+        <br></br>
+        <button class="btn btn-primary custom-button">Đăng nhập</button>
       </form>
     </main>
   );

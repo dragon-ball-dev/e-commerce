@@ -47,7 +47,7 @@ const ProductCard = ({ product }) => {
           </span>
         )}
 
-        <img className="rounded-t-lg w-full h-64" src={image} alt={name} />
+        <img className="rounded-t-lg w-full h-64" src="https://www.w3schools.com/images/w3schools_green.jpg" alt={name} />
       </Link>
       <div className="p-5">
         <Link to={`/products/${id}`}>
@@ -56,7 +56,7 @@ const ProductCard = ({ product }) => {
           </h5>
         </Link>
         <p className="dark:text-slate-100 text-gray-700 font-normal mb-3">
-          {price}
+          {price} <span>VNĐ</span>
         </p>
         <div className="flex items-center my-2">
           <Rating rating={"4STARSABOVE"} />
@@ -68,9 +68,10 @@ const ProductCard = ({ product }) => {
         </div>
         <p className="flex justify-between items-center">
           <span className="text-2xl dark:text-gray-200">
-            <span>{price}</span>
-            <span>$</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
           </span>
+          &nbsp;&nbsp;
           <button
             className="inline-flex items-center py-2 px-3 text-sm font-medium text-center bg-blue-700 text-white rounded hover:bg-blue-900"
             onClick={handleAddToCart} // Attach the click event handler

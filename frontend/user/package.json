@@ -19,6 +19,7 @@
     "buffer": "^6.0.3",
     "crypto": "npm:crypto-browserify",
     "crypto-js": "^4.1.1",
+    "date-fns": "^2.30.0",
     "formik": "^2.4.2",
     "jsonwebtoken": "^9.0.1",
     "jwt-decode": "^3.1.2",

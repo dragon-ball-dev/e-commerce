@@ -21,7 +21,7 @@ const Hero = () => {
         </Link>
       </div>
       <div className="visual my-5 lg:max-w-xl">
-        <img className="rounded-lg max-h-full" src={hero} alt="frontendgyaan" />
+        <img className="rounded-lg max-h-full" src="https://www.w3schools.com/html/pic_trulli.jpg" alt="frontendgyaan" />
       </div>
     </section>
   );

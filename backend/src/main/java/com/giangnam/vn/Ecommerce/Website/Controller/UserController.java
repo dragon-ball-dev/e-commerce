@@ -3,6 +3,7 @@ package com.giangnam.vn.Ecommerce.Website.Controller;
 import java.util.List;
 import java.util.UUID;
 
+import com.giangnam.vn.Ecommerce.Website.DTO.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.giangnam.vn.Ecommerce.Website.DTO.CartDTO;
-import com.giangnam.vn.Ecommerce.Website.DTO.ChangePasswordDTO;
-import com.giangnam.vn.Ecommerce.Website.DTO.LoginDTO;
-import com.giangnam.vn.Ecommerce.Website.DTO.ProductDTO;
-import com.giangnam.vn.Ecommerce.Website.DTO.ResponseDTO;
-import com.giangnam.vn.Ecommerce.Website.DTO.UserDTO;
 import com.giangnam.vn.Ecommerce.Website.Entity.User;
 import com.giangnam.vn.Ecommerce.Website.Repository.UserRepository;
 import com.giangnam.vn.Ecommerce.Website.Service.EmailService;
@@ -97,6 +92,13 @@ public class UserController {
 		if (!userService.isValidJWT(token.substring(7))) return new ResponseEntity<String>("Token khong hop le!!!", HttpStatus.BAD_REQUEST);
 		if (!userService.checkOutCartUser(userService.getInforJWT(token.substring(7)), cartDTO)) return new ResponseEntity<String>("Check out thất bại!!!", HttpStatus.BAD_REQUEST);  
 		return new ResponseEntity<String>("Check out thành công!!!", HttpStatus.OK); 
+	}
+
+	@GetMapping("/get-cart-id")
+	@CrossOrigin
+	public ResponseEntity<CartIdDTO>  getCartId (@RequestHeader("Authorization") String token){
+		if (!userService.isValidJWT(token.substring(7))) return null;
+		return new ResponseEntity<>(userService.getCartId(userService.getInforJWT(token.substring(7))),HttpStatus.OK);
 	}
 	@PostMapping("/user/{email}")
 	@CrossOrigin

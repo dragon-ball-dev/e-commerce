@@ -8,7 +8,5 @@ import java.util.Date;
 public class ShopOrderDTO {
     private Date orderDate;
     private Integer orderTotal;
-    private String description;
-    private String currency;
     private String address;
 }

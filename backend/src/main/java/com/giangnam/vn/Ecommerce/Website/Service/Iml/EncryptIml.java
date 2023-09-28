@@ -73,6 +73,20 @@ public class EncryptIml implements EncryptService {
         return transaction;
     }
 
+    public Transaction getTransactionId(Integer shoppingCartId){
+        Optional<Shopping_Cart> shoppingCartOptional = shoppingCartRepository.findById(shoppingCartId);
+        if (!shoppingCartOptional.isPresent()) {
+            return null;
+        }
+        Transaction transaction = new Transaction();
+        transaction.setTransactionIdMerchant(shoppingCartOptional.get().getTransactionIdMerchant());
+        transaction.setTransactionIdCustomer(shoppingCartOptional.get().getTransactionIdCustomer());
+        transaction.setOrderId(shoppingCartOptional.get().getShop_Order().getId());
+        return transaction;
+    }
+
+
+
     @Override
     public ResponseEntity<EncryptCustomToMerchant> sendEncryptToMerchant(PaymentRequest paymentRequest) {
 
@@ -193,7 +207,7 @@ public class EncryptIml implements EncryptService {
 
             //lưu cert
             X509Certificate cert = generateSelfSignedCertificate(pbulicKeyMerchant, privateKeyMer);
-            String filePath = "D:\\iKP\\2KP\\e-commerce-2kp\\backend\\CERTM.txt";
+            String filePath = "C:\\Users\\laptop88\\OneDrive\\Máy tính\\Project\\e-commerce\\backend\\CERTM.txt";
             saveCertificateToTxtFile(cert, filePath);
 
             // bản chứng thực String

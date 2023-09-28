@@ -25,8 +25,6 @@ public class ShopOrderIml implements ShopOrderService {
             
             shopOrderDTO.setOrderDate(shopOrder1.getOrderDate());
             shopOrderDTO.setOrderTotal(shopOrder1.getOrderTotal());
-            shopOrderDTO.setDescription(shopOrder1.getDescription());
-            shopOrderDTO.setCurrency(shopOrder1.getCurrency());
             shopOrderDTO.setAddress(shopOrder1.getShipping_address());
 
             return new ResponseEntity<>(shopOrderDTO, HttpStatus.OK);
