@@ -5,7 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const ProductCard = ({ product }) => {
-  const { id, name, description, image, categoryName, price, quantityStock } = product;
+  const { id, name, description, productImage, categoryName, price, quantityStock } = product;
 
   const handleAddToCart = async () => {
     try {
@@ -47,7 +47,7 @@ const ProductCard = ({ product }) => {
           </span>
         )}
 
-        <img className="rounded-t-lg w-full h-64" src="https://www.w3schools.com/images/w3schools_green.jpg" alt={name} />
+        <img className="rounded-t-lg w-full h-64" src={productImage} alt={name} style={{width : "100%"}}/>
       </Link>
       <div className="p-5">
         <Link to={`/products/${id}`}>

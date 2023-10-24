@@ -2,42 +2,51 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextF
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function EncryptMerchant() {
     const { id } = useParams();
     const [transactionIdCustomer, setTransactionIdCustomer] = useState('');
     const [transactionIdMerchant, setTransactionIdMerchant] = useState('');
     const [order, setOrder] = useState();
-    const [emOrder, setEmOrder] = useState('');
-    const [eaSlip, setEaSlip] = useState('');
+    const [sign, setSign] = useState('');
+    const [data, setData] = useState('');
+    const [cert, setCert] = useState('');
+    const [flag, setFlag] = useState(false);
     const location = useLocation();
+    const [signMerchant, setSignMerchant] = useState('');
+    const [dataM,setDataM] = useState('');
+    const [certM,setCertM] = useState('');
 
     useEffect(() => {
         const { search } = location;
-        const { emorder, easlip } = extractQueryParams(search);
+        const { sign, data, cert } = extractQueryParams(search);
 
         // Use the values of a and b as needed
-        setEmOrder(emorder);
-        setEaSlip(easlip);
+        setSign(decodeURIComponent(sign));
+        setData(decodeURIComponent(data));
+        setCert(decodeURIComponent(cert))
     }, [location]);
 
     const extractQueryParams = (search) => {
         const params = new URLSearchParams(search);
-        const emorder = params.get('emorder');
-        const easlip = params.get('easlip');
-        return { emorder, easlip };
+        const sign = params.get('sign');
+        const data = params.get('data');
+        const cert = params.get('cert');
+
+        return { sign, data, cert };
     };
 
     async function getTransaction() {
         try {
-            const response = await axios.get("http://localhost:8080/encrypt/get-transaction?shoppingCartId=" + id);
+            const response = await axios.get("http://localhost:8080/encrypt/new-transaction?id=" + id);
             console.log("Transaction", response)
             const data = response.data;
             console.log("Transaction", data)
             setTransactionIdCustomer(data.transactionIdCustomer);
             setTransactionIdMerchant(data.transactionIdMerchant);
-            if (data.orderId) {
-                const order = await axios.get("http://localhost:8080/order/getOrder?id=" + (id - 1));
+            if (data) {
+                const order = await axios.get("http://localhost:8080/order/" + (id - 1));
                 console.log("Order", order)
                 setOrder(order.data);
             }
@@ -49,6 +58,45 @@ function EncryptMerchant() {
     useEffect(() => {
         getTransaction();
     }, []);
+
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+
+        try {
+            const token = JSON.parse(sessionStorage.getItem("token"));
+            const headers = {
+                Authorization: `Bearer ${token}`,
+            };
+            const merchantToAcquired = {
+                cert: cert,
+                signature: sign,
+                data: data
+            }
+            const response = await axios.post(
+                "http://localhost:8080/encrypt/sendMerToAcq",
+                merchantToAcquired
+            );
+
+            console.log("AC to MER", response.data)
+            if (response.data) {
+                toast.success("Chữ ký đã xác thực thanh công")
+                setFlag(true);
+                setSignMerchant(response.data.signature)
+                setDataM(response.data.dataToVerify)
+                setCertM(response.data.certM)
+                console.log(response.data.signature)
+                console.log(response.data.dataToVerify)
+                console.log(response.data.certM)
+            }
+
+
+            // Thực hiện các hành động khác sau khi submit thành công
+        } catch (error) {
+            console.error(error);
+            // Xử lý lỗi nếu gặp vấn đề khi gửi yêu cầu
+        }
+    };
 
 
     return (
@@ -110,37 +158,48 @@ function EncryptMerchant() {
             <section style={{ marginLeft: "200px", marginRight: "200px", marginTop: "50px" }}>
                 <TextField
                     id="standard-multiline-static"
-                    label="Mã hóa đơn hàng"
+                    label="Chữ ký Khách hàng"
                     multiline
                     rows={8}
                     style={{ width: '49%' }}
                     variant="standard"
-                    defaultValue={emOrder}
+                    defaultValue={sign}
                     disabled
                 />&nbsp;
                 <TextField
                     id="standard-multiline-static"
-                    label="Mã hóa Slip"
+                    label="Chữ ký Merchant"
                     multiline
-                    defaultValue={eaSlip}
                     rows={8}
+                    value={signMerchant}
                     style={{ width: '49%' }}
                     variant="standard"
                     disabled
                 />
             </section >
-            <section style={{ marginLeft: "200px", marginRight: "200px" }}>
-                <div className="text-right my-5">
-                    <a href={`/signature/`+id+"?emorder="+emOrder+"&easlip="+eaSlip}>
+            <form onSubmit={handleFormSubmit}>
+                <section style={{ marginLeft: "200px", marginRight: "200px" }}>
+                    <div className="text-right my-5">
+
                         <button
                             type="submit"
                             className="bg-blue-700 text-white px-4 py-2.5 rounded-lg hover:bg-blue-900 focus-"
                         >
-                            Xác thực thông tin<i className="ml-2 bi bi-arrow-right"></i>
-                        </button>
-                    </a>
-                </div>
-            </section>
+                            Xác thực chữ ký
+                        </button> &nbsp;
+                        {flag === true ? <>
+                            <a href={`/merchant-to-acquier/`+id+`?data=`+dataM+`&sign=`+signMerchant+`&cert=`+certM}>
+                                <button
+                                    type="button"
+                                    className="bg-blue-700 text-white px-4 py-2.5 rounded-lg hover:bg-blue-900 focus-"
+                                >
+                                    Tiếp tục xác thực<i className="ml-2 bi bi-arrow-right"></i>
+                                </button>
+                            </a>
+                        </> : <></>}
+                    </div>
+                </section>
+            </form>
         </>
     );
 

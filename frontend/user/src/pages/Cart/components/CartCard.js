@@ -38,7 +38,7 @@ const CartCard = ({ product }) => {
     <div className="flex flex-wrap justify-between border-b dark:border-slate-700 max-w-4xl m-auto p-2 mb-5">
       <div className="flex">
         <Link to={`/products/${product.id}`}>
-          <img className="w-32" src="https://www.w3schools.com/images/w3schools_green.jpg" alt={product.name} />
+          <img className="w-32" src={product.productImage} alt={product.name} />
         </Link>
         <div className="">
           <Link to={`/products/${product.id}`}>

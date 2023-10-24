@@ -25,6 +25,7 @@ import ConfirmOrder from "../pages/Cart/components/ConfirmOrder";
 import PaymentAuthority from "../pages/Cart/components/PaymentAuthority";
 import EncryptMerchant from "../pages/Cart/components/EcryptMerchant";
 import Signature from "../pages/Cart/components/Signature";
+import MerchantToAcquier from "../pages/Cart/components/MerchantToAcquire";
 //import Calendar from "../Admin/scenes/calendar";
 
 const AllRoutes = () => {
@@ -43,6 +44,7 @@ const AllRoutes = () => {
         <Route path="/confirm-order" element={<ConfirmOrder />} />
         <Route path="/payment-authorization/:id" element={<PaymentAuthority />} />
         <Route path="/ecrypt-merchant/:id" element={<EncryptMerchant />} />
+        <Route path="/merchant-to-acquier/:id" element={<MerchantToAcquier />} />
         <Route path="/signature/:id" element={<Signature />} />
         <Route path="/check-out" element={<Checkout />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />

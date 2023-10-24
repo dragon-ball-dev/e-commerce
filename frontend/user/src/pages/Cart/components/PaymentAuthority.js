@@ -18,14 +18,14 @@ function PaymentAuthority() {
 
     async function getTransaction() {
         try {
-            const response = await axios.get("http://localhost:8080/encrypt/get-transaction?shoppingCartId=" + id);
+            const response = await axios.post("http://localhost:8080/encrypt/new-transaction?id=" + id);
             console.log("Transaction", response)
             const data = response.data;
             console.log("Transaction", data)
             setTransactionIdCustomer(data.transactionIdCustomer);
             setTransactionIdMerchant(data.transactionIdMerchant);
-            if (data.orderId) {
-                const order = await axios.get("http://localhost:8080/order/getOrder?id=" + (id - 1));
+            if (data) {
+                const order = await axios.get("http://localhost:8080/order/" + (id - 1));
                 console.log("Order", order)
                 setOrder(order.data);
             }
@@ -39,7 +39,7 @@ function PaymentAuthority() {
     useEffect(() => {
         async function fetchProducts() {
             try {
-                await axios.post("http://localhost:8080/encrypt/addnew-transaction?shoppingCartId=" + id);
+                await axios.post("http://localhost:8080/encrypt/new-transaction?id=" + id);
             } catch (error) {
                 console.error("Failed to fetch products:", error);
             }
@@ -112,7 +112,7 @@ function PaymentAuthority() {
             };
 
             const response = await axios.post(
-                "http://localhost:8080/encrypt/encryptCusToMer",
+                "http://localhost:8080/encrypt/sendCusToMer",
                 paymentRequest,
                 {
                     headers: headers,
@@ -123,7 +123,10 @@ function PaymentAuthority() {
             if(response.data) {
                 toast.success("Thông tin đơn hàng đã được lưu")
                 setTimeout(() => {
-                    window.location.replace("/ecrypt-merchant/"+ id +"?emorder="+response.data.emorder+"&easlip="+response.data.easlip);
+                    const encodedData = encodeURIComponent(response.data.dataToVerify);
+                    const encodeCert = encodeURIComponent(response.data.certC);
+                    const encodeSign = encodeURIComponent(response.data.signature);
+                    window.location.replace("/ecrypt-merchant/"+ id +"?data="+encodedData+"&cert="+encodeCert+"&sign="+encodeSign);
                 }, 4200);
             }
 

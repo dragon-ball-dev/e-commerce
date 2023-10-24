@@ -46,23 +46,23 @@ VALUES ('Electronics'),
 
 -- Thêm dữ liệu vào bảng `product`
 INSERT INTO `product` (`category_id`, `name`, `description`, `image`)
-VALUES (1, 'Smartphone', 'High-quality smartphones from Japan', 'smartphone.jpg'),
-       (2, 'Kimono', 'Traditional Japanese clothing', 'kimono.jpg'),
-       (3, 'Teapot', 'Japanese-style teapots', 'teapot.jpg'),
-       (4, 'Skincare Set', 'Natural skincare products', 'skincare.jpg')
+VALUES (1, 'Smartphone', 'High-quality smartphones from Japan', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-mkCAqiO64pvN0NTKbu94Ck9OnHRkTptpEw&usqp=CAU'),
+       (2, 'Kimono', 'Traditional Japanese clothing', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-mkCAqiO64pvN0NTKbu94Ck9OnHRkTptpEw&usqp=CAU'),
+       (3, 'Teapot', 'Japanese-style teapots', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-mkCAqiO64pvN0NTKbu94Ck9OnHRkTptpEw&usqp=CAU'),
+       (4, 'Skincare Set', 'Natural skincare products', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-mkCAqiO64pvN0NTKbu94Ck9OnHRkTptpEw&usqp=CAU')
        -- Thêm các sản phẩm khác ở đây
        ;
 
 -- Thêm dữ liệu vào bảng `product_item`
 INSERT INTO `product_item` (`product_id`, `price`, `quantity_stock`, `product_image`)
-VALUES (1, 500, 50, 'smartphone1.jpg'),
-       (1, 520, 30, 'smartphone2.jpg'),
-       (2, 200, 20, 'kimono1.jpg'),
-       (2, 220, 25, 'kimono2.jpg'),
-       (3, 30, 100, 'teapot1.jpg'),
-       (3, 35, 80, 'teapot2.jpg'),
-       (4, 50, 60, 'skincare1.jpg'),
-       (4, 55, 70, 'skincare2.jpg')
+VALUES (1, 500, 50, 'https://png.pngtree.com/png-vector/20230506/ourlarge/pngtree-perfume-smells-good-png-image_7087542.png'),
+       (1, 520, 30, 'https://png.pngtree.com/png-clipart/20201212/ourlarge/pngtree-blue-purple-gradient-perfume-bottle-png-image_2552476.jpg'),
+       (2, 200, 20, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-mkCAqiO64pvN0NTKbu94Ck9OnHRkTptpEw&usqp=CAU'),
+       (2, 220, 25, 'https://png.pngtree.com/png-clipart/20230508/original/pngtree-beautiful-perfume-bottle-png-image_9152693.png'),
+       (3, 30, 100, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-mkCAqiO64pvN0NTKbu94Ck9OnHRkTptpEw&usqp=CAU'),
+       (3, 35, 80, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-mkCAqiO64pvN0NTKbu94Ck9OnHRkTptpEw&usqp=CAU'),
+       (4, 50, 60, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-mkCAqiO64pvN0NTKbu94Ck9OnHRkTptpEw&usqp=CAU'),
+       (4, 55, 70, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-mkCAqiO64pvN0NTKbu94Ck9OnHRkTptpEw&usqp=CAU')
        -- Thêm các sản phẩm khác ở đây
        ;
 

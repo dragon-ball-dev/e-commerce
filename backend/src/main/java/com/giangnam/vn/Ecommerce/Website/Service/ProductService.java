@@ -43,7 +43,7 @@ public class ProductService {
 	public ProductDTO toDTO(Product_Item product_Item) {
 		return new ProductDTO(product_Item.getId(),product_Item.getProduct().getName(),
 				product_Item.getProduct().getDescription(), product_Item.getProductImage().substring( Math.min(61,product_Item.getProductImage().length()-1) ),
-				product_Item.getProduct().getCategory().getCategoryName(), product_Item.getPrice(),
+				product_Item.getProductImage() ,product_Item.getProduct().getCategory().getCategoryName(), product_Item.getPrice(),
 				product_Item.getQuantityStock());
 	}
 	

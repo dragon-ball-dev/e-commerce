@@ -6,10 +6,9 @@ const Hero = () => {
   return (
     <section className="flex flex-col lg:flex-row dark:text-slate-100 items-cente">
       <div className="text my-5">
-        <h1 className="text-5xl fi=ont-bold">The Ultimate eBook Store</h1>
+        <h1 className="text-5xl fi=ont-bold">The Ultimate Flower Store</h1>
         <p className="text-2xl my-7 px-1 dark:text-slate-300">
-          Trang web cung cấp các loại sản phẩm như đồ điện tử,
-          đồ gia dụng, đồ dùng học tập.... Bên cạnh đó là nhiều
+          Trang web cung cấp các loại nước hoa.... Bên cạnh đó là nhiều
           ưu đãi hấp dẫn cho khách hàng khi mua sắm tại website
         </p>
         <Link
